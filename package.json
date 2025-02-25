@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mastra/core": "^0.2.0-alpha.92",
-    "@mastra/speech-elevenlabs": "^0.0.0",
+    "@mastra/core": "0.4.2-alpha.1",
+    "@mastra/voice-elevenlabs": "^0.1.0-alpha.2",
     "@types/dom-speech-recognition": "^0.0.4",
     "framer-motion": "^12.4.2",
     "lucide-react": "^0.475.0",
@@ -18,7 +18,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "@ai-sdk/xai": "^1.1.11"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

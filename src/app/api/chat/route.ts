@@ -1,8 +1,5 @@
 import { NextResponse } from 'next/server';
 import { chatAgent } from '@/mastra/agents/chatAgent';
-import createTTSService from '@/mastra/services/tts';
-
-const ttsService = createTTSService();
 
 export async function POST(req: Request) {
   try {
@@ -31,11 +28,10 @@ export async function POST(req: Request) {
     }
 
     const response = generateResult.text; // Extract text from the result
-    
     // Get audio stream from TTS
     let audioStream;
     try {
-      audioStream = await ttsService.streamAudio(response, voiceId);
+      audioStream = await chatAgent.speak(response);
     } catch (ttsError) {
       console.error('TTS Streaming Error:', ttsError);
       return new NextResponse(JSON.stringify({ 
@@ -51,7 +47,7 @@ export async function POST(req: Request) {
     // Convert stream to buffer for response
     const chunks = [];
     for await (const chunk of audioStream) {
-      chunks.push(chunk);
+      chunks.push(Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk));
     }
     const audioBuffer = Buffer.concat(chunks);
 
