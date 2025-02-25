@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
-import createTTSService from '@/mastra/services/tts';
+import { chatAgent } from '@/mastra/agents/chatAgent';
 
 export async function GET() {
   try {
-    const tts = createTTSService();
-    const voices = await tts.getVoices();
+    const voices = await chatAgent.getSpeakers();
     
     return NextResponse.json({ voices });
   } catch (error) {

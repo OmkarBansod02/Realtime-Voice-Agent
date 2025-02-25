@@ -1,4 +1,7 @@
+import { xai } from '@ai-sdk/xai';
 import { Agent } from "@mastra/core/agent";
+import { ElevenLabsVoice } from '@mastra/voice-elevenlabs';
+import { CompositeVoice } from '@mastra/core/voice';
 
 export const chatAgent = new Agent({
   name: "Mastra vocie Ai ",
@@ -55,12 +58,8 @@ Guidelines:
 2. Answer only what is asked
 3. Use appropriate accent-specific phrases
 4. Maintain voice personality consistently`,
-
-model: {
-  provider: "GROQ",
-  name: "qwen-2.5-32b",
-  toolChoice: "auto",
-},
+  model: xai('grok-2-1212'),
+  voice: new CompositeVoice({
+    speakProvider: new ElevenLabsVoice(),
+  })
 });
-
-
